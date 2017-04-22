@@ -88,7 +88,7 @@ public class GeoPoint{
 
 	public override string ToString ()
 	{
-		return string.Format ("[GeoPoint: lat_d={0}, lon_d={1}, lat_r={2}, lon_r={3}]", lat_d.ToString("R"), lon_d.ToString("R"), lat_r.ToString("R"), lon_r.ToString("R"));
+        return string.Format("{0}, {1}", lat_d.ToString("R"), lon_d.ToString("R"));
 	}
 
 }

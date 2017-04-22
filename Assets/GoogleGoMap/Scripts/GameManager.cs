@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager> {
 	[HideInInspector]
 	public bool locationServicesIsRunning = false;
 
-	public GameObject mainMap;
+    public GameObject mainMap;
 	public GameObject newMap;
 
 	public GameObject player;
@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager> {
 
     public Text locactionInfo;
 
-	public enum PlayerStatus { TiedToDevice, FreeFromDevice }
+    public enum PlayerStatus { TiedToDevice, FreeFromDevice }
 
 	private PlayerStatus _playerStatus;
 	public PlayerStatus playerStatus
@@ -77,7 +77,6 @@ public class GameManager : Singleton<GameManager> {
 			return;
 		}
 
-            locactionInfo.text = "Location: " + player_loc.loc;
         
 
 		// playerGeoPosition = getMainMapMap ().getPositionOnMap(new Vector2(player.transform.position.x, player.transform.position.z));
@@ -117,9 +116,11 @@ public class GameManager : Singleton<GameManager> {
 			newMap.GetComponent<MeshRenderer>().enabled = false;
 			newMap.SetActive(false);
 		}
-	}
 
-	public Vector3? ScreenPointToMapPosition(Vector2 point){
+        locactionInfo.text = playerGeoPosition.ToString();
+    }
+
+    public Vector3? ScreenPointToMapPosition(Vector2 point){
 		var ray = Camera.main.ScreenPointToRay(point);
 		//RaycastHit hit;
 		// create a plane at 0,0,0 whose normal points to +Y:

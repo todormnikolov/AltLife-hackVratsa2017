@@ -9,6 +9,7 @@ public class SimpleController : MonoBehaviour
     public Animator charAnimator;
 
     private int walkToHash;
+    private int idleToHash;
     private Vector3 moveDirection = Vector3.zero;
 
     void Start()
@@ -16,6 +17,8 @@ public class SimpleController : MonoBehaviour
         // Store reference to attached component
         controller = GetComponent<CharacterController>();
         walkToHash = Animator.StringToHash("Base Layer.WALK");
+        idleToHash = Animator.StringToHash("Base Layer.IDLE");
+
     }
 
     void Update()
@@ -32,8 +35,10 @@ public class SimpleController : MonoBehaviour
         {
             charAnimator.Play(walkToHash);
             controller.Move(moveDirection * Time.deltaTime);
-
         }
-
+        else
+        {
+            charAnimator.Play(idleToHash);
+        }
     }
 }

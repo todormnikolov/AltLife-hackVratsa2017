@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : Singleton<GameManager> {
 
@@ -26,7 +27,9 @@ public class GameManager : Singleton<GameManager> {
 		set { _playerStatus = value; }
 	}
 
-	void Awake (){
+
+
+    void Awake (){
 
 		Time.timeScale = 1;
 		playerStatus = PlayerStatus.TiedToDevice;
@@ -34,10 +37,9 @@ public class GameManager : Singleton<GameManager> {
 		player_loc = player.GetComponent<PlayerLocationService>();
 		newMap.GetComponent<MeshRenderer>().enabled = false;
 		newMap.SetActive (false);
+    }
 
-	}
-
-	public GoogleStaticMap getMainMapMap () {
+    public GoogleStaticMap getMainMapMap () {
 		return mainMap.GetComponent<GoogleStaticMap> ();
 	}
 
@@ -63,11 +65,12 @@ public class GameManager : Singleton<GameManager> {
 
 		player.GetComponent<ObjectPosition> ().setPositionOnMap (player_loc.loc);
 
-		GameObject[] objectsOnMap = GameObject.FindGameObjectsWithTag ("ObjectOnMap");
+        GameObject[] objectsOnMap = GameObject.FindGameObjectsWithTag ("ObjectOnMap");
 
 		foreach (GameObject obj in objectsOnMap) {
-			obj.GetComponent<ObjectPosition> ().setPositionOnMap ();
+			obj.GetComponent<ObjectPosition> ().setPositionOnMap();
 		}
+
     }
 
     void Update () {
@@ -77,10 +80,9 @@ public class GameManager : Singleton<GameManager> {
 			return;
 		}
 
-        
 
-		// playerGeoPosition = getMainMapMap ().getPositionOnMap(new Vector2(player.transform.position.x, player.transform.position.z));
-		playerGeoPosition = new GeoPoint();
+        // playerGeoPosition = getMainMapMap ().getPositionOnMap(new Vector2(player.transform.position.x, player.transform.position.z));
+        playerGeoPosition = new GeoPoint();
 		// GeoPoint playerGeoPosition = getMainMapMap ().getPositionOnMap(new Vector2(player.transform.position.x, player.transform.position.z));
 		if (playerStatus == PlayerStatus.TiedToDevice) {
 			playerGeoPosition = player_loc.loc;

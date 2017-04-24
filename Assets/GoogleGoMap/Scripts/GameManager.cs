@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager> {
 
 
 
-    void Awake (){
+    new void Awake (){
 
 		Time.timeScale = 1;
 		playerStatus = PlayerStatus.TiedToDevice;

@@ -11,9 +11,20 @@ public class PlayerLocationService : MonoBehaviour {
 	private float locationUpdateInterval = 0.2f; // seconds
 	private double lastLocUpdate = 0.0; //seconds
 
+    public double LastLocUpdate
+    {
+        get
+        {
+            return lastLocUpdate;
+        }
 
+        set
+        {
+            lastLocUpdate = value;
+        }
+    }
 
-	public void StartLocationService() {
+    public void StartLocationService() {
 		Debug.Log ("Player Loc started.");
 		StartCoroutine (_StartLocationService ());
 	}

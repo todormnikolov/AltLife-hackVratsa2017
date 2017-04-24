@@ -9,13 +9,11 @@ public class ObjectPosition : MonoBehaviour
     public float lat_d = 0.0f, lon_d = 0.0f;
 
     private GeoPoint pos;
-    private BoxCollider colliderObject;
 
     void Awake()
     {
         pos = new GeoPoint();
         pos.setLatLon_deg(lat_d, lon_d);
-        colliderObject = GetComponent<BoxCollider>();
     }
 
     public void setPositionOnMap()

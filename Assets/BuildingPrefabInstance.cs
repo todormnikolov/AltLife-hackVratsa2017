@@ -1,29 +1,40 @@
-﻿using UnityEditor;
+﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildingPrefabInstance : MonoBehaviour
 {
     public GameObject mainPlayer;
     public GameObject BuildingPrefab;
+    public GameObject BuyDialog;
 
-    GameObject BuildingPrefabClone;
+    private GameObject BuildingPrefabClone;
     public Animator charAnimator;
+    public AudioSource woohooAudio;
+    public AudioSource cachingAudio;
+    public AudioSource nomoneyAudio;
+    public Text moneyText;
 
-    public void dialogAsk()
+    public void loadScene()
     {
-        if (EditorUtility.DisplayDialog("Купуване", "Сигурен ли си, че сакаш да купиш те тоя имот?", "Да", "Не"))
+        Application.LoadLevel("MapScene");
+    }
+
+    public void createPrefab()
+    {
+  
+        if (moneyText.text == "0€")
         {
-            Debug.Log("сакам");
+            nomoneyAudio.Play();
         }
         else
         {
-            Debug.Log("не сакам");
+            var pos = mainPlayer.transform.position + new Vector3(0, 0, -5);
+            BuildingPrefabClone = Instantiate(BuildingPrefab, pos, Quaternion.identity) as GameObject;
+            charAnimator.Play(Animator.StringToHash("Base Layer.TURN"));
+            cachingAudio.Play(0);
+            woohooAudio.Play(30000);
+            moneyText.text ="0€";
         }
-    }
-
-    private void createPrefab()
-    {
-        var pos = mainPlayer.transform.position + new Vector3(2, 0, 0);
-        BuildingPrefabClone = Instantiate(BuildingPrefab, pos, Quaternion.identity) as GameObject;
     }
 }
